@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 
-import { resolve } from 'path'
-import arg = require('arg')
+import { resolve } from 'path';
+import arg = require('arg');
+import Run from './run';
 
-import Module = require('module')
-
-export function main(argv: string[] = process.argv.slice(2)){
+const main = (argv: string[] = process.argv.slice(2)) => {
   // Get parameters
   const args = {
     ...arg({
       '--help': Boolean,
       '--version': Boolean,
+      '--watch': Boolean,
       // Aliases.
       '-h': '--help',
       '-v': '--version',
+      '-w': '--watch'
     }, {
       argv,
     })
@@ -21,26 +22,19 @@ export function main(argv: string[] = process.argv.slice(2)){
   const {
     '--help': help = false,
     '--version': version = false,
+    '--watch': watch = false
   } = args;
 
   printHelp(help);
-
   printVersion(version);
 
   const cwd = process.cwd();
   const scriptPath = args._.length ? resolve(cwd, args._[0]) : undefined;
-
   if (scriptPath){
-    // Create a local module instance based on `cwd`.
-    const module = new Module(scriptPath)
-    module.filename = scriptPath
-    module.paths = (Module as any)._nodeModulePaths(cwd)
-
-    // Prepend `ts-node` arguments to CLI for child processes.
-    process.execArgv.unshift(__filename, ...process.argv.slice(2, process.argv.length - args._.length))
-    process.argv = [process.argv[1]].concat(scriptPath || []).concat(args._.slice(1))
-      
-    Module.runMain()
+    const run = new Run(scriptPath, watch);
+    run.start();
+  } else {
+    printHelp(true);
   }
 }
 
@@ -52,7 +46,7 @@ const printHelp = (help: boolean) => {
   if (help) {
     console.log(
       `
-      Usage: tscn [ options | script.ts ]
+      Usage: tscn  options | script.ts [ -w ]
 
       Options:
 

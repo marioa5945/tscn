@@ -1,11 +1,11 @@
 {
   "name": "tscn",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "TypeScript execution environment for node.js",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run clean && tsc",
-    "test": "node dist/index.js ./test.ts",
+    "test": "node dist/index.js ./server/test.ts -w",
     "clean": "rimraf dist",
     "debug": "npm run clean && tsc && npm run test"
   },
@@ -22,19 +22,21 @@
   "keywords": [
     "typescript",
     "node",
-    "ts"
+    "ts",
+    "tsc"
   ],
   "author": {
     "name": "mario a",
     "email": "marioa5945@gmail.com",
     "url": "https://marioa5945.github.io"
   },
-  "license": "MIT",
+  "license": "ISC",
   "peerDependencies": {
     "typescript": ">=2.7"
   },
   "devDependencies": {
     "@types/node": "^14.14.16",
+    "chokidar": "^3.5.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.1.3"
   },

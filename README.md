@@ -1,14 +1,19 @@
 # tscn
 
-## Introduction
+> 1、convention over configuration
+> 2、concise yet expressive
 
 ## Installation
 
 ```sh
 # Locally in your project
+yarn add tscn --dev
+
 npm install -D tscn
 
 # Or globally
+yarn global add tscn
+
 npm install -g tscn
 ```
 
@@ -18,7 +23,7 @@ npm install -g tscn
 
 ```sh
 # Execute a script as `node` + `tsc`.
-ts-node script.ts
+tscn script.ts [-w]
 ```
 
 ### Debug
@@ -27,9 +32,11 @@ ts-node script.ts
 npm run debug
 ```
 
+### watch
+
+watch files: ./server/\*\*(.ts | .js | .mjs)
+restart delay: 1500ms
+
 ## License
 
-MIT
-
-[ts-node-image]: https://raw.githubusercontent.com/TypeStrong/ts-node/master/logo.svg
-[ts-node-url]: https://github.com/TypeStrong/ts-node
+ISC
