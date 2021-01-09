@@ -1,5 +1,6 @@
 const { fork } = require('child_process');
 const chokidar = require('chokidar');
+import { resolve } from 'path';
 
 export default class Run {
   private scriptPath: string;
@@ -33,7 +34,7 @@ export default class Run {
    */
   public start = () => {
     const self = this;
-    this.subprocess = fork('./dist/exec.js', [this.scriptPath], [null, null, null, 'ipc']);
+    this.subprocess = fork(resolve(__dirname, 'exec.js'), [this.scriptPath], [null, null, null, 'ipc']);
 
     // watch subprocess message
     this.subprocess.on('message', function (msg:any) {
