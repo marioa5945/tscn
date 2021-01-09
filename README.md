@@ -1,7 +1,7 @@
 # tscn
 
-> 1、convention over configuration
-> 2、concise yet expressive
+- convention over configuration
+- concise yet expressive
 
 ## Installation
 
