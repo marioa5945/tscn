@@ -1,13 +1,13 @@
 {
   "name": "tscn",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "TypeScript execution environment for node.js",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run clean && tsc",
     "test": "node dist/index.js ./server/test.ts -w",
     "clean": "rimraf dist",
-    "debug": "npm run clean && tsc && npm run test"
+    "dev": "npm run clean && tsc && npm run test"
   },
   "bin": {
     "tscn": "dist/index.js"

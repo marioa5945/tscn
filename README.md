@@ -29,7 +29,7 @@ tscn script.ts [-w]
 ### Debug
 
 ```sh
-npm run debug
+npm run dev
 ```
 
 ### watch
