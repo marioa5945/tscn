@@ -31,11 +31,12 @@ const runFile = () => {
 /**
  * Register TypeScript compiler instance onto node.js
  */
-function register() {
+const register = () => {
   const jsCompile = require.extensions[".js"]; // tslint:disable-line
   require.extensions[".ts"] = function (m: any, filename) {
     const _compile = m._compile;
     m._compile = function (code: string, fileName: string) {
+      // ts to js
       let { outputText } = ts.transpileModule(code, {
         compilerOptions: { module: ts.ModuleKind.CommonJS },
       });
@@ -43,6 +44,6 @@ function register() {
     };
     return jsCompile(m, filename);
   };
-}
+};
 
 runFile();
